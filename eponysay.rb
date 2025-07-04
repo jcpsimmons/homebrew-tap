@@ -5,10 +5,8 @@ class Eponysay < Formula
   sha256 "d4794c9f3eeaf202a3d0d1530c41bf22c12d79091a3ce722988b1972ced7f3bb"
   version "3.0.3"
   
-  depends_on "texinfo"
-  
   def install
-    system "python3", "setup.py", "--prefix=#{prefix}", "--freedom=partial", "--without-info", "install"
+    system "python3", "setup.py", "--prefix=#{prefix}", "--freedom=partial", "--without-info", "--without-pdf", "install"
   end
   
   test do
