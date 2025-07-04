@@ -8,7 +8,7 @@ class Eponysay < Formula
   depends_on "texinfo"
   
   def install
-    system "python3", "setup.py", "--prefix=#{prefix}", "--freedom=partial", "install"
+    system "python3", "setup.py", "--prefix=#{prefix}", "--freedom=partial", "--without-info", "install"
   end
   
   test do
