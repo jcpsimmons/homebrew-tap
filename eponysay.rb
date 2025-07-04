@@ -6,10 +6,10 @@ class Eponysay < Formula
   version "3.0.3"
   
   def install
-    system "python3", "setup.py", "--prefix=#{prefix}", "--freedom=partial", "--without-info", "--without-pdf", "--without-shared-cache", "install"
+    system "python3", "setup.py", "--prefix=#{prefix}", "--freedom=partial", "--without-info", "--without-pdf", "--without-shared-cache", "--with-ponysay-command=#{bin}/eponysay", "--with-ponythink-command=#{bin}/eponythink", "install"
   end
   
   test do
-    system "#{bin}/ponysay", "Test"
+    system "#{bin}/eponysay", "Test"
   end
 end
