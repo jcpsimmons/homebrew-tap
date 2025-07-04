@@ -6,7 +6,12 @@ class Eponysay < Formula
   version "3.0.3"
   
   def install
-    system "python3", "setup.py", "--prefix=#{prefix}", "--freedom=partial", "--without-info", "--without-pdf", "--without-shared-cache", "--with-ponysay-command=#{bin}/eponysay", "--with-ponythink-command=#{bin}/eponythink", "install"
+    system "python3", "setup.py", "--prefix=#{prefix}", "--freedom=partial", "--without-info", "--without-pdf", "--without-shared-cache", "install"
+    
+    # Create eponysay symlinks
+    bin.install_symlink "ponysay" => "eponysay"
+    bin.install_symlink "ponythink" => "eponythink"
+    bin.install_symlink "ponysay-tool" => "eponysay-tool"
   end
   
   test do
