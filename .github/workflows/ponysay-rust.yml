@@ -1,0 +1,33 @@
+name: ponysay-rust formula
+
+on:
+  push:
+    paths:
+      - ponysay-rust.rb
+      - .github/workflows/ponysay-rust.yml
+  pull_request:
+    paths:
+      - ponysay-rust.rb
+      - .github/workflows/ponysay-rust.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  formula:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: Homebrew/actions/setup-homebrew@main
+      - name: Check formula style
+        run: brew style --formula jcpsimmons/tap/ponysay-rust
+      - name: Build tagged release
+        run: brew install --build-from-source jcpsimmons/tap/ponysay-rust
+      - name: Test rendering, escaping and command names
+        run: brew test jcpsimmons/tap/ponysay-rust
+      - name: Audit installed formula
+        run: brew audit --strict jcpsimmons/tap/ponysay-rust
