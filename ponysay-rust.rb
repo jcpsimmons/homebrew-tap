@@ -1,9 +1,9 @@
 class PonysayRust < Formula
   desc "Native Rust pony-themed terminal art with bundled ponies and quotes"
   homepage "https://github.com/jcpsimmons/ponysay-rust"
-  url "https://github.com/jcpsimmons/ponysay-rust/archive/refs/tags/v4.0.0.tar.gz"
-  sha256 "621b8f5ad632f0ffa9d279ca043cccd2eb1b68f38e88780d550bfe0524f32456"
-  license "GPL-3.0-or-later"
+  url "https://github.com/jcpsimmons/ponysay-rust/archive/refs/tags/v4.1.0.tar.gz"
+  sha256 "c67813e15a5f7c19c5151b0f52ec2c9b05cb82895e32e49d839344cbf81b1cdf"
+  license all_of: ["GPL-3.0-or-later", "CC-BY-4.0"]
 
   depends_on "rust" => :build
 
@@ -34,6 +34,17 @@ class PonysayRust < Formula
     thought = shell_output("#{bin}/ponythink-rust -f twilight --no-color thinking 2>stderr")
     assert_match "( thinking", thought
     refute_match "< thinking", thought
+    assert_empty (testpath/"stderr").read
+
+    gear = shell_output("#{bin}/ponysay-rust -f rust --no-color 'Rust gear' 2>stderr")
+    assert_match "< Rust gear", gear
+    assert_match "██", gear
+    refute_match "\e[", gear
+    assert_empty (testpath/"stderr").read
+
+    gear_thought = shell_output("#{bin}/ponythink-rust -f rust --no-color 'Borrow checked.' 2>stderr")
+    assert_match "( Borrow checked.", gear_thought
+    assert_match "██", gear_thought
     assert_empty (testpath/"stderr").read
 
     assert_match message, shell_output("#{libexec}/bin/ponysay -f twilight --no-color '#{message}'")

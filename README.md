@@ -7,7 +7,11 @@ Rust pony renderer with bundled artwork, quotes and balloon styles:
 brew install jcpsimmons/tap/ponysay-rust
 ponysay-rust -f twilight 'Hello from Rust'
 ponythink-rust -f twilight 'Thinking in ponies'
+ponysay-rust -f rust 'Fearless concurrency.'
+ponythink-rust -f rust 'Borrow checked.'
 ```
+
+Version 4.1.0 adds the bundled Rust gear logo, selected with `-f rust`.
 
 The formula builds the tagged release with Cargo's locked dependency versions.
 Rust is required only for the build. The installed program has no additional
